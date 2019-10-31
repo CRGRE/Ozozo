@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<root>
+    <agents number="2">
+        <defaultparameters size="0.5" movespeed="0.2" rotationspeed="0.2"/>
+        <agent id="0" start.x="0" start.y="0" goal.x="2" goal.y="0" start.heading="0" goal.heading="90"/>
+        <agent id="1" start.x="5" start.y="3" goal.x="2" goal.y="4" start.heading="270" goal.heading="180"/>
+    </agents>
+    <map type="grid">
+        <grid width="6" height="4" cell="30">
+            <row>0 1 0 0 0 0 </row>
+            <row>0 1 0 0 1 0 </row>
+            <row>0 0 0 0 1 0 </row>
+            <row>0 0 0 0 0 0 </row>
+        </grid>
+    </map>
+    <algorithm>
+        <allowanyangle>true</allowanyangle>
+        <rescheduling>random</rescheduling>
+        <startsafeinterval>3</startsafeinterval>
+        <prioritization>fifo</prioritization>
+        <timelimit>60</timelimit>
+        <planforturns>true</planforturns>
+        <waitbeforemove>0</waitbeforemove>
+    </algorithm>
+    <options>
+        <loglevel>2</loglevel>
+        <logpath/>
+        <logfilename/>
+    </options>
+    <log>
+        <summary runtime="0.038393717" tries="1" agentssolved="2 (100.000000%)" flowtime="923.69995" makespan="279.6441"/>
+        <path>
+            <row number="0">* 1 * 0 0 0 </row>
+            <row number="1">* 1 * 0 1 0 </row>
+            <row number="2">* * * 0 1 * </row>
+            <row number="3">0 0 * * * * </row>
+        </path>
+        <agent id="0" start.x="0" start.y="0" start.heading="0" goal.x="2" goal.y="0" goal.heading="90" size="0.5" movespeed="0.2" rotationspeed="0.2">
+            <path pathfound="true" runtime="0.00067255012" duration="37.5">
+                <section id="0" start.x="0" start.y="0" start.heading="0" goal.x="0" goal.y="0" goal.heading="270" duration="2.5"/>
+                <section id="1" start.x="0" start.y="0" start.heading="270" goal.x="0" goal.y="2" goal.heading="270" duration="10"/>
+                <section id="2" start.x="0" start.y="2" start.heading="270" goal.x="0" goal.y="2" goal.heading="0" duration="2.5"/>
+                <section id="3" start.x="0" start.y="2" start.heading="0" goal.x="2" goal.y="2" goal.heading="0" duration="10"/>
+                <section id="4" start.x="2" start.y="2" start.heading="0" goal.x="2" goal.y="2" goal.heading="90" duration="2.5"/>
+                <section id="5" start.x="2" start.y="2" start.heading="90" goal.x="2" goal.y="0" goal.heading="90" duration="10"/>
+            </path>
+        </agent>
+        <agent id="1" start.x="5" start.y="2" start.heading="270" goal.x="2" goal.y="3" goal.heading="180" size="0.5" movespeed="0.2" rotationspeed="0.2">
+            <path pathfound="true" runtime="0.0020737175" duration="22.5">
+                <section id="0" start.x="5" start.y="2" start.heading="270" goal.x="5" goal.y="3" goal.heading="270" duration="5"/>
+                <section id="1" start.x="5" start.y="3" start.heading="270" goal.x="5" goal.y="3" goal.heading="180" duration="2.5"/>
+                <section id="2" start.x="5" start.y="3" start.heading="180" goal.x="2" goal.y="3" goal.heading="180" duration="15"/>
+            </path>
+        </agent>
+    </log>
+</root>
