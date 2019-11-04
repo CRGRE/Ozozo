@@ -142,6 +142,7 @@ string OzoBot::compColorCode() {
 	for (int i = 0; i < colorString.length(); i++) {
 		if (!i || compiledColorCode[i - 1] != colorString[i]) compiledColorCode += colorString[i]; else compiledColorCode += "W";
 	}
+	sequence.clear();
 	return compiledColorCode;
 }
 

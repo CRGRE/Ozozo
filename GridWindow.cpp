@@ -46,7 +46,9 @@ void GridWindow::createGridWindow() {
 		int w = int((float(GetDeviceCaps(GetWindowDC(GetActiveWindow()), HORZRES)) - 100.0) / logXML->gridWidth + 0.5);
 		int h = int((float(GetDeviceCaps(GetWindowDC(GetActiveWindow()), VERTRES)) - 100.0) / logXML->gridHeight + 0.5);
 		if (w < h) cellSide = w; else cellSide = h;
-		logXML->cellSide = cellSide;
+		logXML->cellSide = int(float(cellSide) / PPMm + 0.5);
+		char mes[3]; mes[0] = '0' + logXML->cellSide / 10 % 10; mes[1] = '0' + logXML->cellSide % 10; mes[2] = '\0';
+		MessageBox(NULL, "Warning: new cell side", mes, MB_OK);
 	}
 	logXML->compileAgents();
 	width = logXML->gridWidth * cellSide + 1;
@@ -54,6 +56,7 @@ void GridWindow::createGridWindow() {
 	window = new RenderWindow(VideoMode(width, height), "OzoBots Grid [O = Open File  Enter = Flash  Space = Start  Esc = Escape]", Style::Default);
 	window->setFramerateLimit(20);
 	
+	gridObstacles.clear();
 	for (int w = 0; w < logXML->gridWidth; w++) for (int h = 0; h < logXML->gridHeight; h++) {
 		if (!logXML->grid[w][h]) {
 			RectangleShape obst(Vector2f(cellSide, cellSide));
@@ -62,6 +65,7 @@ void GridWindow::createGridWindow() {
 			gridObstacles.push_back(obst);
 		}
 	}
+	gridLines.clear();
 	for (int w = 0; w <= logXML->gridWidth; w++) {
 		RectangleShape rectline(Vector2f(1, height));
 		rectline.setPosition(Vector2f(0 + cellSide * w, 0));
@@ -74,6 +78,8 @@ void GridWindow::createGridWindow() {
 		rectline.setFillColor(Color::Black);
 		gridLines.push_back(rectline);
 	}
+	ozoShapes.clear();
+	ozoPlaces.clear();
 	for (int i = 0; i < logXML->ozobots.size(); i++) {
 		//char mes[2]; mes[0] = '0' + i % 10; mes[1] = '\0';
 		//MessageBox(NULL, "lol", mes, MB_OK);
