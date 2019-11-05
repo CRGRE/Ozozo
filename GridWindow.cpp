@@ -27,7 +27,7 @@ bool GridWindow::chooseFile() {
 void GridWindow::createDefWindow() {
 	PPMm = float(GetDeviceCaps(GetWindowDC(GetActiveWindow()), HORZRES)) / float(GetDeviceCaps(GetWindowDC(GetActiveWindow()), HORZSIZE));
 	int rad = int(PPMm * 20.0 + 0.5);
-	window = new RenderWindow(VideoMode(rad * 2 + 10, rad * 2 + 10), "OzoBots Grid", Style::Default);
+	window = new RenderWindow(VideoMode(rad * 2 + 10, rad * 2 + 10), "OzoBots Grid [O = Open File  Enter = Flash  Space = Start  Esc = Escape]", Style::Titlebar | Style::Close);
 	CircleShape round(rad, 64);
 	round.setPosition(Vector2f(5, 5));
 	round.setFillColor(Color::White);
@@ -47,13 +47,14 @@ void GridWindow::createGridWindow() {
 		int h = int((float(GetDeviceCaps(GetWindowDC(GetActiveWindow()), VERTRES)) - 100.0) / logXML->gridHeight + 0.5);
 		if (w < h) cellSide = w; else cellSide = h;
 		logXML->cellSide = int(float(cellSide) / PPMm + 0.5);
-		char mes[3]; mes[0] = '0' + logXML->cellSide / 10 % 10; mes[1] = '0' + logXML->cellSide % 10; mes[2] = '\0';
-		MessageBox(NULL, "Warning: new cell side", mes, MB_OK);
+		
+		string mes = "New cell side: " + to_string(logXML->cellSide) + " [Pixels in mm: " + to_string(PPMm) + "]";
+		MessageBox(NULL, mes.c_str(), "Warning: new cell side", MB_OK);
 	}
 	logXML->compileAgents();
 	width = logXML->gridWidth * cellSide + 1;
 	height = logXML->gridHeight * cellSide + 1;
-	window = new RenderWindow(VideoMode(width, height), "OzoBots Grid [O = Open File  Enter = Flash  Space = Start  Esc = Escape]", Style::Default);
+	window = new RenderWindow(VideoMode(width, height), "OzoBots Grid [O = Open File  Enter = Flash  Space = Start  Esc = Escape]", Style::Titlebar | Style::Close);
 	window->setFramerateLimit(20);
 	
 	gridObstacles.clear();

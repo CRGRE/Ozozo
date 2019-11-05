@@ -1,9 +1,9 @@
 #include "OzoBot.h"
 
 OzoColor::OzoColor(int r, int g, int b) {
-	this->r = r;
-	this->g = g;
-	this->b = b;
+	this->r = r % 128;
+	this->g = g % 128;
+	this->b = b % 128;
 }
 
 OzoColor::OzoColor() {

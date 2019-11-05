@@ -6,6 +6,7 @@
 #include "main.h"
 #include "LogXMLParser.h"
 
+using namespace std;
 using namespace sf;
 
 class GridWindow {
